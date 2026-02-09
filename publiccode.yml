@@ -8,7 +8,7 @@ categories:
   - data-visualization
 dependsOn:
   open:
-    - name: Consumer JMS fascicolo v3
+    - name: Tipi Dato Abilitati
       optional: false
       version: ''
       versionMax: ''
@@ -18,7 +18,7 @@ description:
     features:
       - archiviazione documentale
     longDescription: |
-      Consumer JMS fascicolo v3 è una componente software ideata per consumare messaggi inviati su una particolare coda o JMS queue (ProducerCodaVersFascicoliQueue) alimentata dal flussi applicativi di Preingest e attraverso tale messaggio invocare l'apposito servizio di Tipi Dato Abilitati (API REST)
+      Tipi Dato Abilitati è una componente software ideata per consumare messaggi inviati su una particolare coda o JMS queue (ProducerCodaVersFascicoliQueue) alimentata dal flussi applicativi di Preingest e attraverso tale messaggio invocare l'apposito servizio di Tipi Dato Abilitati (API REST)
     shortDescription: |-
       Componente che consuma messaggi inviati su coda JMS da parte di Preingest e invoca l'API REST di Tipi Dato Abilitati.
 developmentStatus: stable
