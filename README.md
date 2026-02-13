@@ -8,7 +8,35 @@ Fonte template redazione documento:  https://www.makeareadme.com/.
 
 # Descrizione
 
-Documentazione quarkus ufficiale https://quarkus.io/.
+API REST per la ricerca dei tipi di dato a cui l’utente che invoca il servizio è abilitato. Il servizio permette di filtrare i risultati in base al contesto operativo, offrendo due endpoint distinti a seconda che la ricerca avvenga per struttura SACER o per versatore PING. In entrambi i casi, il servizio restituisce una lista in formato JSON standard secondo i criteri impostati.
+
+## Esempio di invocazione 
+
+Di seguito un esempio di invocazione dell'API esposta (per maggiori informazioni è possibile utilizzare il descrittore YAML ottenuto secondo definizione standard OAS 3.1): 
+
+1. Ricerca per Struttura (SACER).
+Utilizzare questo endpoint per ottenere i tipi dato abilitati per una specifica struttura:
+
+```
+curl -X 'GET' \
+'<URI>/tipidato-abilitati/api/strut/tipidato?amb=PARER_PROVA&ente=ente_test&strut=PARER_TEST' \ 
+-H 'accept: application/json'
+
+```
+
+2. Ricerca per Versatore (PING).
+Utilizzare questo endpoint per ottenere i tipi dato abilitati per un determinato versatore:
+
+```
+curl -X 'GET' \
+'<URI>/tipidato-abilitati/api/vers/tipidato?amb=PARER_PROVA&vers=AGENZIA_RICOSTRUZIONE' \ 
+-H 'accept: application/json'
+
+```
+
+## Swagger (OpenAPI)
+
+Per la definizione completa è possibile utilizzare l'apposito descrittore OpenAPI generato mediante MicroProfile (Swagger) : `<URI>/tipidato-abilitati/q/swagger-ui`
 
 # Installazione
 
