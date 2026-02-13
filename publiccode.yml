@@ -18,9 +18,9 @@ description:
     features:
       - archiviazione documentale
     longDescription: |
-      Tipi Dato Abilitati è una componente software ideata per consumare messaggi inviati su una particolare coda o JMS queue (ProducerCodaVersFascicoliQueue) alimentata dal flussi applicativi di Preingest e attraverso tale messaggio invocare l'apposito servizio di Tipi Dato Abilitati (API REST)
+      Componente software per la ricerca e l'identificazione dei tipi di dato a cui l'utente invocante è abilitato. Il servizio espone due API REST che restituiscono una lista in formato JSON standard contenente i tipi dato delle strutture SACER (registri, tipi ud, tipi doc, tipi fascicolo e sottostrutture) o dei versatori PING (tipi object), filtrabili specificando come parametri di ricerca (query-params) la struttura o il versatore.
     shortDescription: |-
-      Componente che consuma messaggi inviati su coda JMS da parte di Preingest e invoca l'API REST di Tipi Dato Abilitati.
+      API REST per la ricerca dei tipi dato abilitati di una struttura SACER o di un versatore PING
 developmentStatus: stable
 intendedAudience:
   countries:
