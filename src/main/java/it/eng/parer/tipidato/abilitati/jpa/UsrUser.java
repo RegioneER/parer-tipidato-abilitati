@@ -46,23 +46,23 @@ public class UsrUser implements Serializable {
     @Id
     @Column(name = "ID_USER_IAM")
     public Long getIdUserIam() {
-	return this.idUserIam;
+        return this.idUserIam;
     }
 
     @Column(name = "NM_USERID")
     public String getNmUserid() {
-	return this.nmUserid;
+        return this.nmUserid;
     }
 
     @Column(name = "TIPO_USER")
     public String getTipoUser() {
-	return this.tipoUser;
+        return this.tipoUser;
     }
 
     // bi-directional many-to-one association to UsrUsoUserApplic
     @OneToMany(mappedBy = "usrUser")
     public List<UsrUsoUserApplic> getUsrUsoUserApplics() {
-	return this.usrUsoUserApplics;
+        return this.usrUsoUserApplics;
     }
 
 }

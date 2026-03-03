@@ -35,78 +35,78 @@ class VersTipiDatoEndpointTest {
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void successNoResult() {
-	given().when().queryParam("amb", "NO-amb").queryParam("vers", "NO-vers")
-		.get(URL_GET_VERS_TIPIDATO).then().statusCode(200).body("$", hasKey("totale"))
-		.body("totale", is(0));
+        given().when().queryParam("amb", "NO-amb").queryParam("vers", "NO-vers")
+                .get(URL_GET_VERS_TIPIDATO).then().statusCode(200).body("$", hasKey("totale"))
+                .body("totale", is(0));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void successVers() {
-	given().when().queryParam("amb", "PARER_PROVA").queryParam("vers", "AGENZIA_RICOSTRUZIONE")
-		.get(URL_GET_VERS_TIPIDATO).then().statusCode(200).body("$", hasKey("totale"))
-		.body("$", hasKey("tipiDato"));
+        given().when().queryParam("amb", "PARER_PROVA").queryParam("vers", "AGENZIA_RICOSTRUZIONE")
+                .get(URL_GET_VERS_TIPIDATO).then().statusCode(200).body("$", hasKey("totale"))
+                .body("$", hasKey("tipiDato"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badAmbNoVers() {
-	given().when().queryParam("amb", "PARER_PROVA").get(URL_GET_VERS_TIPIDATO).then()
-		.statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"));
+        given().when().queryParam("amb", "PARER_PROVA").get(URL_GET_VERS_TIPIDATO).then()
+                .statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badNoAmbVers() {
-	given().when().queryParam("vers", "AGENZIA_RICOSTRUZIONE").get(URL_GET_VERS_TIPIDATO).then()
-		.statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"));
+        given().when().queryParam("vers", "AGENZIA_RICOSTRUZIONE").get(URL_GET_VERS_TIPIDATO).then()
+                .statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badNoAmbNoVers() {
-	given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(400)
-		.body("$", hasKey("BAD-REQUEST-ERROR-1")).body("$", hasKey("BAD-REQUEST-ERROR-2"));
+        given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(400)
+                .body("$", hasKey("BAD-REQUEST-ERROR-1")).body("$", hasKey("BAD-REQUEST-ERROR-2"));
     }
 
     @Test
     @TestSecurity(user = " ", roles = {
-	    "versatore" })
+            "versatore" })
     void badUserEmptyRequest() {
-	given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(400);
+        given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(400);
     }
 
     @Test
     @TestSecurity(authorizationEnabled = true)
     void authNoTokenRequest() {
-	given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(401);
+        given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(401);
     }
 
     @Test
     @TestSecurity(user = "fakeuser", roles = {
-	    "fakerole" })
+            "fakerole" })
     void noAuthRequest() {
-	given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(403);
+        given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(403);
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void methodNotAllowed() {
-	given().when().post(URL_GET_VERS_TIPIDATO).then().statusCode(405);
+        given().when().post(URL_GET_VERS_TIPIDATO).then().statusCode(405);
     }
 
     @Test
     @TestSecurity(user = "test_microservizi_no_abil", roles = {
-	    "versatore" })
+            "versatore" })
     void noAuthRequestBySIAM() {
-	given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(401).body("$",
-		hasKey(COD_PERM_INTERNAL));
+        given().when().get(URL_GET_VERS_TIPIDATO).then().statusCode(401).body("$",
+                hasKey(COD_PERM_INTERNAL));
     }
 }

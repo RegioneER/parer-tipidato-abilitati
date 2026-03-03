@@ -51,52 +51,52 @@ public class UsrUsoUserApplic implements Serializable {
     @Id
     @Column(name = "ID_USO_USER_APPLIC")
     public Long getIdUsoUserApplic() {
-	return this.idUsoUserApplic;
+        return this.idUsoUserApplic;
     }
 
     public void setIdUsoUserApplic(Long idUsoUserApplic) {
-	this.idUsoUserApplic = idUsoUserApplic;
+        this.idUsoUserApplic = idUsoUserApplic;
     }
 
     // bi-directional many-to-one association to UsrAbilOrganiz
     @OneToMany(mappedBy = "usrUsoUserApplic")
     public List<UsrAbilOrganiz> getUsrAbilOrganizs() {
-	return this.usrAbilOrganizs;
+        return this.usrAbilOrganizs;
     }
 
     public void setUsrAbilOrganizs(List<UsrAbilOrganiz> usrAbilOrganizs) {
-	this.usrAbilOrganizs = usrAbilOrganizs;
+        this.usrAbilOrganizs = usrAbilOrganizs;
     }
 
     // bi-directional many-to-one association to AplApplic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_APPLIC")
     public AplApplic getAplApplic() {
-	return this.aplApplic;
+        return this.aplApplic;
     }
 
     public void setAplApplic(AplApplic aplApplic) {
-	this.aplApplic = aplApplic;
+        this.aplApplic = aplApplic;
     }
 
     // bi-directional many-to-one association to UsrUser
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USER_IAM")
     public UsrUser getUsrUser() {
-	return this.usrUser;
+        return this.usrUser;
     }
 
     public void setUsrUser(UsrUser usrUser) {
-	this.usrUser = usrUser;
+        this.usrUser = usrUser;
     }
 
     // bi-directional many-to-one association to UsrUsoRuoloUserDefault
     @OneToMany(mappedBy = "usrUsoUserApplic")
     public List<UsrUsoRuoloUserDefault> getUsrUsoRuoloUserDefaults() {
-	return this.usrUsoRuoloUserDefaults;
+        return this.usrUsoRuoloUserDefaults;
     }
 
     public void setUsrUsoRuoloUserDefaults(List<UsrUsoRuoloUserDefault> usrUsoRuoloUserDefaults) {
-	this.usrUsoRuoloUserDefaults = usrUsoRuoloUserDefaults;
+        this.usrUsoRuoloUserDefaults = usrUsoRuoloUserDefaults;
     }
 }

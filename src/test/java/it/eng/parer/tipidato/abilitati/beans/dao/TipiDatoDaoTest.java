@@ -43,14 +43,14 @@ class TipiDatoDaoTest {
 
     @Test
     void findTipiDatoByStrut_ok() {
-	assertDoesNotThrow(() -> dao.findTipiDato(AppNameEnum.SACER, USERID, OrganizEnum.AMBIENTE,
-		NM_AMBIENTE, OrganizEnum.ENTE, NM_ENTE, OrganizEnum.STRUTTURA, NM_STRUT));
+        assertDoesNotThrow(() -> dao.findTipiDato(AppNameEnum.SACER, USERID, OrganizEnum.AMBIENTE,
+                NM_AMBIENTE, OrganizEnum.ENTE, NM_ENTE, OrganizEnum.STRUTTURA, NM_STRUT));
     }
 
     @Test
     void findTipiDatoByVers_ok() {
-	assertDoesNotThrow(() -> dao.findTipiDato(AppNameEnum.SACER_PREINGEST, USERID, null, null,
-		OrganizEnum.AMBIENTE, NM_AMBIENTE, OrganizEnum.VERSATORE, NM_VERS));
+        assertDoesNotThrow(() -> dao.findTipiDato(AppNameEnum.SACER_PREINGEST, USERID, null, null,
+                OrganizEnum.AMBIENTE, NM_AMBIENTE, OrganizEnum.VERSATORE, NM_VERS));
     }
 
 }

@@ -43,36 +43,36 @@ public class AplApplic implements Serializable {
     private List<UsrUsoUserApplic> usrUsoUserApplics = new ArrayList<>();
 
     public AplApplic() {
-	/* Hibernate */
+        /* Hibernate */
     }
 
     @Id
     @Column(name = "ID_APPLIC")
     public Long getIdApplic() {
-	return this.idApplic;
+        return this.idApplic;
     }
 
     @Column(name = "NM_APPLIC")
     public String getNmApplic() {
-	return this.nmApplic;
+        return this.nmApplic;
     }
 
     // bi-directional many-to-one association to AplTipoOrganiz
     @OneToMany(mappedBy = "aplApplic")
     public List<AplTipoOrganiz> getAplTipoOrganizs() {
-	return this.aplTipoOrganizs;
+        return this.aplTipoOrganizs;
     }
 
     // bi-directional many-to-one association to UsrOrganizIam
     @OneToMany(mappedBy = "aplApplic")
     public List<UsrOrganizIam> getUsrOrganizIams() {
-	return this.usrOrganizIams;
+        return this.usrOrganizIams;
     }
 
     // bi-directional many-to-one association to UsrUsoUserApplic
     @OneToMany(mappedBy = "aplApplic")
     public List<UsrUsoUserApplic> getUsrUsoUserApplics() {
-	return this.usrUsoUserApplics;
+        return this.usrUsoUserApplics;
     }
 
 }

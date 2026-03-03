@@ -44,21 +44,21 @@ public class UsrUsoRuoloUserDefault implements Serializable {
     @Id
     @Column(name = "ID_USO_RUOLO_USER_DEFAULT")
     public Long getIdUsoRuoloUserDefault() {
-	return this.idUsoRuoloUserDefault;
+        return this.idUsoRuoloUserDefault;
     }
 
     // bi-directional many-to-one association to PrfRuolo
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_RUOLO")
     public PrfRuolo getPrfRuolo() {
-	return this.prfRuolo;
+        return this.prfRuolo;
     }
 
     // bi-directional many-to-one association to UsrUsoUserApplic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USO_USER_APPLIC")
     public UsrUsoUserApplic getUsrUsoUserApplic() {
-	return this.usrUsoUserApplic;
+        return this.usrUsoUserApplic;
     }
 
 }

@@ -37,25 +37,25 @@ import jakarta.persistence.TypedQuery;
 public class TipiDatoDao implements ITipiDatoDao {
 
     private static final String FIND_TIPI_DATO_QUERY_BASE = "SELECT classeTipoDato.nmClasseTipoDato, tipoDatoIam.nmTipoDato FROM UsrAbilDati abilDati "
-	    + " JOIN abilDati.usrTipoDatoIam tipoDatoIam JOIN abilDati.usrUsoUserApplic usoUserApplic "
-	    + " JOIN usoUserApplic.usrUser utente JOIN usoUserApplic.aplApplic applic "
-	    + " JOIN tipoDatoIam.aplClasseTipoDato classeTipoDato JOIN tipoDatoIam.usrOrganizIam organizIam "
-	    + " JOIN organizIam.aplTipoOrganiz tipoOrganiz "
-	    + " JOIN organizIam.usrOrganizIamPadre organizIamPadre "
-	    + " JOIN organizIamPadre.aplTipoOrganiz tipoOrganizPadre ";
+            + " JOIN abilDati.usrTipoDatoIam tipoDatoIam JOIN abilDati.usrUsoUserApplic usoUserApplic "
+            + " JOIN usoUserApplic.usrUser utente JOIN usoUserApplic.aplApplic applic "
+            + " JOIN tipoDatoIam.aplClasseTipoDato classeTipoDato JOIN tipoDatoIam.usrOrganizIam organizIam "
+            + " JOIN organizIam.aplTipoOrganiz tipoOrganiz "
+            + " JOIN organizIam.usrOrganizIamPadre organizIamPadre "
+            + " JOIN organizIamPadre.aplTipoOrganiz tipoOrganizPadre ";
 
     private static final String FIND_TIPI_DATO_QUERY_ADD_WHERE_COND = " WHERE applic.nmApplic = :nmApplic "
-	    + " AND utente.nmUserid = :nmUserid "
-	    + " AND tipoOrganiz.nmTipoOrganiz = :nmTipoOrganiz "
-	    + " AND organizIam.nmOrganiz = :nmOrganiz "
-	    + " AND organizIamPadre.nmOrganiz = :nmOrganizPadre "
-	    + " AND tipoOrganizPadre.nmTipoOrganiz = :nmTipoOrganizPadre ";
+            + " AND utente.nmUserid = :nmUserid "
+            + " AND tipoOrganiz.nmTipoOrganiz = :nmTipoOrganiz "
+            + " AND organizIam.nmOrganiz = :nmOrganiz "
+            + " AND organizIamPadre.nmOrganiz = :nmOrganizPadre "
+            + " AND tipoOrganizPadre.nmTipoOrganiz = :nmTipoOrganizPadre ";
 
     private static final String FIND_TIPI_DATO_QUERY_ADD_THIRD_LEVEL_JOIN = " JOIN organizIamPadre.usrOrganizIamPadre organizIamNonno "
-	    + " JOIN organizIamNonno.aplTipoOrganiz tipoOrganizNonno ";
+            + " JOIN organizIamNonno.aplTipoOrganiz tipoOrganizNonno ";
 
     private static final String FIND_TIPI_DATO_QUERY_ADD_THIRD_LEVEL_WHERE_COND = " AND organizIamNonno.nmOrganiz = :nmOrganizNonno "
-	    + " AND tipoOrganizNonno.nmTipoOrganiz = :nmTipoOrganizNonno ";
+            + " AND tipoOrganizNonno.nmTipoOrganiz = :nmTipoOrganizNonno ";
 
     @Inject
     EntityManager entityManager;
@@ -63,37 +63,37 @@ public class TipiDatoDao implements ITipiDatoDao {
     // strad fac
     @Override
     public Stream<Object[]> findTipiDato(AppNameEnum nmApplic, String nmUserid,
-	    OrganizEnum nmTipoOrganizNonno, String nmOrganizNonno, OrganizEnum nmTipoOrganizPadre,
-	    String nmOrganizPadre, OrganizEnum nmTipoOrganiz, String nmOrganiz) {
+            OrganizEnum nmTipoOrganizNonno, String nmOrganizNonno, OrganizEnum nmTipoOrganizPadre,
+            String nmOrganizPadre, OrganizEnum nmTipoOrganiz, String nmOrganiz) {
 
-	StringBuilder queryTot = new StringBuilder(FIND_TIPI_DATO_QUERY_BASE);
-	if (nmOrganizNonno != null) {
-	    queryTot.append(FIND_TIPI_DATO_QUERY_ADD_THIRD_LEVEL_JOIN)
-		    .append(FIND_TIPI_DATO_QUERY_ADD_WHERE_COND)
-		    .append(FIND_TIPI_DATO_QUERY_ADD_THIRD_LEVEL_WHERE_COND);
-	} else {
-	    queryTot.append(FIND_TIPI_DATO_QUERY_ADD_WHERE_COND);
-	}
+        StringBuilder queryTot = new StringBuilder(FIND_TIPI_DATO_QUERY_BASE);
+        if (nmOrganizNonno != null) {
+            queryTot.append(FIND_TIPI_DATO_QUERY_ADD_THIRD_LEVEL_JOIN)
+                    .append(FIND_TIPI_DATO_QUERY_ADD_WHERE_COND)
+                    .append(FIND_TIPI_DATO_QUERY_ADD_THIRD_LEVEL_WHERE_COND);
+        } else {
+            queryTot.append(FIND_TIPI_DATO_QUERY_ADD_WHERE_COND);
+        }
 
-	TypedQuery<Object[]> query = entityManager.createQuery(queryTot.toString(), Object[].class);
+        TypedQuery<Object[]> query = entityManager.createQuery(queryTot.toString(), Object[].class);
 
-	// hibernate hint
-	query.setHint(HibernateHints.HINT_READ_ONLY, true);
-	query.setHint(HibernateHints.HINT_CACHEABLE, true);
+        // hibernate hint
+        query.setHint(HibernateHints.HINT_READ_ONLY, true);
+        query.setHint(HibernateHints.HINT_CACHEABLE, true);
 
-	// params
-	query.setParameter("nmApplic", nmApplic.name());
-	query.setParameter("nmUserid", nmUserid);
-	query.setParameter("nmTipoOrganiz", nmTipoOrganiz.name());
-	query.setParameter("nmOrganiz", nmOrganiz);
-	query.setParameter("nmTipoOrganizPadre", nmTipoOrganizPadre.name());
-	query.setParameter("nmOrganizPadre", nmOrganizPadre);
-	if (nmOrganizNonno != null) {
-	    query.setParameter("nmTipoOrganizNonno", nmTipoOrganizNonno.name());
-	    query.setParameter("nmOrganizNonno", nmOrganizNonno);
-	}
+        // params
+        query.setParameter("nmApplic", nmApplic.name());
+        query.setParameter("nmUserid", nmUserid);
+        query.setParameter("nmTipoOrganiz", nmTipoOrganiz.name());
+        query.setParameter("nmOrganiz", nmOrganiz);
+        query.setParameter("nmTipoOrganizPadre", nmTipoOrganizPadre.name());
+        query.setParameter("nmOrganizPadre", nmOrganizPadre);
+        if (nmOrganizNonno != null) {
+            query.setParameter("nmTipoOrganizNonno", nmTipoOrganizNonno.name());
+            query.setParameter("nmOrganizNonno", nmOrganizNonno);
+        }
 
-	return query.getResultStream();
+        return query.getResultStream();
     }
 
 }

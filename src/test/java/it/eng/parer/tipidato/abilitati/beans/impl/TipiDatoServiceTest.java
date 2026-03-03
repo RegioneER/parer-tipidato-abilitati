@@ -46,28 +46,28 @@ class TipiDatoServiceTest {
 
     @Test
     void listTipiDatoByStrut_ok() {
-	TipiDatoResponse result = assertDoesNotThrow(() -> service.listTipiDatoByStrut(USERID,
-		NM_AMBIENTE, NM_ENTE, NM_STRUT, StringUtils.EMPTY));
-	assertTrue(!result.getTipiDato().isEmpty());
+        TipiDatoResponse result = assertDoesNotThrow(() -> service.listTipiDatoByStrut(USERID,
+                NM_AMBIENTE, NM_ENTE, NM_STRUT, StringUtils.EMPTY));
+        assertTrue(!result.getTipiDato().isEmpty());
     }
 
     @Test
     void listTipiDatoByStrutEmptyUserid_ko() {
-	assertThrows(ConstraintViolationException.class, () -> service
-		.listTipiDatoByStrut(StringUtils.EMPTY, null, null, null, StringUtils.EMPTY));
+        assertThrows(ConstraintViolationException.class, () -> service
+                .listTipiDatoByStrut(StringUtils.EMPTY, null, null, null, StringUtils.EMPTY));
     }
 
     @Test
     void listTipiDatoByVers_ok() {
-	TipiDatoResponse result = assertDoesNotThrow(
-		() -> service.listTipiDatoByVers(USERID, NM_AMBIENTE, NM_VERS, StringUtils.EMPTY));
-	assertTrue(!result.getTipiDato().isEmpty());
+        TipiDatoResponse result = assertDoesNotThrow(
+                () -> service.listTipiDatoByVers(USERID, NM_AMBIENTE, NM_VERS, StringUtils.EMPTY));
+        assertTrue(!result.getTipiDato().isEmpty());
     }
 
     @Test
     void listTipiDatoByVersEmptyUserid_ko() {
-	assertThrows(ConstraintViolationException.class,
-		() -> service.listTipiDatoByVers(StringUtils.EMPTY, null, null, StringUtils.EMPTY));
+        assertThrows(ConstraintViolationException.class,
+                () -> service.listTipiDatoByVers(StringUtils.EMPTY, null, null, StringUtils.EMPTY));
     }
 
 }

@@ -34,8 +34,8 @@ public interface ITipiDatoService {
      * @return la response decorata (vedi {@link TipiDatoResponse})
      */
     TipiDatoResponse listTipiDatoByStrut(
-	    @NotBlank(message = "userId non valorizzato") String userId, String nmAmbiente,
-	    String nmEnte, String nmStrut, String uri);
+            @NotBlank(message = "userId non valorizzato") String userId, String nmAmbiente,
+            String nmEnte, String nmStrut, String uri);
 
     /**
      * Restituisce la lista dei tipi dato abilitati
@@ -48,6 +48,6 @@ public interface ITipiDatoService {
      * @return la response decorata (vedi {@link TipiDatoResponse})
      */
     TipiDatoResponse listTipiDatoByVers(@NotBlank(message = "userId non valorizzato") String userId,
-	    String nmAmbiente, String nmVers, String uri);
+            String nmAmbiente, String nmVers, String uri);
 
 }

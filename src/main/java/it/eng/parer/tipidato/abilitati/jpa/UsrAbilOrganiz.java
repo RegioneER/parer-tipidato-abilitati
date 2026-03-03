@@ -44,21 +44,21 @@ public class UsrAbilOrganiz implements Serializable {
     @Id
     @Column(name = "ID_ABIL_ORGANIZ")
     public Long getIdAbilOrganiz() {
-	return this.idAbilOrganiz;
+        return this.idAbilOrganiz;
     }
 
     // bi-directional many-to-one association to UsrOrganizIam
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ORGANIZ_IAM")
     public UsrOrganizIam getUsrOrganizIam() {
-	return this.usrOrganizIam;
+        return this.usrOrganizIam;
     }
 
     // bi-directional many-to-one association to UsrUsoUserApplic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USO_USER_APPLIC")
     public UsrUsoUserApplic getUsrUsoUserApplic() {
-	return this.usrUsoUserApplic;
+        return this.usrUsoUserApplic;
     }
 
 }

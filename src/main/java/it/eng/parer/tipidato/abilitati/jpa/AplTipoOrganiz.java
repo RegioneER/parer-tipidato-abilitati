@@ -49,25 +49,25 @@ public class AplTipoOrganiz implements Serializable {
     @Id
     @Column(name = "ID_TIPO_ORGANIZ")
     public Long getIdTipoOrganiz() {
-	return this.idTipoOrganiz;
+        return this.idTipoOrganiz;
     }
 
     @Column(name = "NM_TIPO_ORGANIZ")
     public String getNmTipoOrganiz() {
-	return this.nmTipoOrganiz;
+        return this.nmTipoOrganiz;
     }
 
     // bi-directional many-to-one association to AplApplic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_APPLIC")
     public AplApplic getAplApplic() {
-	return this.aplApplic;
+        return this.aplApplic;
     }
 
     // bi-directional many-to-one association to UsrOrganizIam
     @OneToMany(mappedBy = "aplTipoOrganiz")
     public List<UsrOrganizIam> getUsrOrganizIams() {
-	return this.usrOrganizIams;
+        return this.usrOrganizIams;
     }
 
 }

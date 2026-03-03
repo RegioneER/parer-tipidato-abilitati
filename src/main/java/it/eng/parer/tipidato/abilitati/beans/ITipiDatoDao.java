@@ -43,7 +43,7 @@ public interface ITipiDatoDao {
      * @return un array di Object contenente i dati dei tipi dato
      */
     Stream<Object[]> findTipiDato(AppNameEnum nmApplic, String nmUserid,
-	    OrganizEnum nmTipoOrganizNonno, String nmOrganizNonno, OrganizEnum nmTipoOrganizPadre,
-	    String nmOrganizPadre, OrganizEnum nmTipoOrganiz, String nmOrganiz);
+            OrganizEnum nmTipoOrganizNonno, String nmOrganizNonno, OrganizEnum nmTipoOrganizPadre,
+            String nmOrganizPadre, OrganizEnum nmTipoOrganiz, String nmOrganiz);
 
 }

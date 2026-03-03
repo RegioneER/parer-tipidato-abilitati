@@ -73,42 +73,42 @@ public class StrutTipiDatoAbilitatiEndpoint {
 
     @Inject
     public StrutTipiDatoAbilitatiEndpoint(ITipiDatoService tipiDatoService,
-	    SecurityContext securityCtx) {
-	this.tipiDatoService = tipiDatoService;
-	this.securityCtx = securityCtx;
+            SecurityContext securityCtx) {
+        this.tipiDatoService = tipiDatoService;
+        this.securityCtx = securityCtx;
     }
 
     @Operation(summary = "Lista tipi dato abilitati con filtro per struttura", description = "Lista tipi dato abilitati con filtro per struttura tramite query string")
     @SecurityRequirement(name = "bearerAuth")
     @APIResponses(value = {
-	    @APIResponse(responseCode = "200", description = "Lista tipi dato recuperata con successo", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TipiDatoResponse.class))),
-	    @APIResponse(responseCode = "400", description = "Richiesta non valida"),
-	    @APIResponse(responseCode = "401", description = "Autenticazione fallita"),
-	    @APIResponse(responseCode = "403", description = "Non autorizzato ad accedere al servizio"),
-	    @APIResponse(responseCode = "405", description = "Invocazione non corretta"),
-	    @APIResponse(responseCode = "500", description = "Errore generico (richiesta non valida secondo specifiche)", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = AppGenericRuntimeException.class))) })
+            @APIResponse(responseCode = "200", description = "Lista tipi dato recuperata con successo", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TipiDatoResponse.class))),
+            @APIResponse(responseCode = "400", description = "Richiesta non valida"),
+            @APIResponse(responseCode = "401", description = "Autenticazione fallita"),
+            @APIResponse(responseCode = "403", description = "Non autorizzato ad accedere al servizio"),
+            @APIResponse(responseCode = "405", description = "Invocazione non corretta"),
+            @APIResponse(responseCode = "500", description = "Errore generico (richiesta non valida secondo specifiche)", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = AppGenericRuntimeException.class))) })
     @GET
     @Path(RESOURCE_TIPIDATO)
     @Produces(MediaType.APPLICATION_JSON)
     @Blocking
     public Response listtipidatostrut(@BeanParam @Valid StrutParamQuery org,
-	    @Context HttpServerRequest request) {
-	// do something .....
-	TipiDatoResponse results = getTipiDatoResponseFromDto(org, request);
-	//
-	return Response.ok(results)
-		.lastModified(
-			Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
-		.tag(new EntityTag(ETAG)).build();
+            @Context HttpServerRequest request) {
+        // do something .....
+        TipiDatoResponse results = getTipiDatoResponseFromDto(org, request);
+        //
+        return Response.ok(results)
+                .lastModified(
+                        Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
+                .tag(new EntityTag(ETAG)).build();
     }
 
     private TipiDatoResponse getTipiDatoResponseFromDto(StrutParamQuery org,
-	    HttpServerRequest request) {
-	String nmAmbiente = org.nmAmbiente;
-	String nmEnte = org.nmEnte;
-	String nmStrut = org.nmStrut;
-	String uri = URLDecoder.decode(request.uri(), Charset.defaultCharset());
-	return tipiDatoService.listTipiDatoByStrut(securityCtx.getUserPrincipal().getName(),
-		nmAmbiente, nmEnte, nmStrut, uri);
+            HttpServerRequest request) {
+        String nmAmbiente = org.nmAmbiente;
+        String nmEnte = org.nmEnte;
+        String nmStrut = org.nmStrut;
+        String uri = URLDecoder.decode(request.uri(), Charset.defaultCharset());
+        return tipiDatoService.listTipiDatoByStrut(securityCtx.getUserPrincipal().getName(),
+                nmAmbiente, nmEnte, nmStrut, uri);
     }
 }

@@ -55,55 +55,55 @@ public class TipiDatoService implements ITipiDatoService {
 
     @Override
     @Transactional(value = TxType.REQUIRED, rollbackOn = {
-	    AppGenericRuntimeException.class })
+            AppGenericRuntimeException.class })
     public TipiDatoResponse listTipiDatoByStrut(String nmUserid, String nmAmbiente, String nmEnte,
-	    String nmStrut, String uri) {
-	String struttura = nmAmbiente + " / " + nmEnte + " / " + nmStrut;
-	try {
-	    // Inizializzo le informazioni da restituire
-	    List<TipoDatoDto> dtoList = new ArrayList<>();
-	    Integer numLastLevelOrg = elabTipiDato(nmUserid, AppNameEnum.SACER,
-		    OrganizEnum.AMBIENTE, nmAmbiente, OrganizEnum.ENTE, nmEnte,
-		    OrganizEnum.STRUTTURA, nmStrut, dtoList);
+            String nmStrut, String uri) {
+        String struttura = nmAmbiente + " / " + nmEnte + " / " + nmStrut;
+        try {
+            // Inizializzo le informazioni da restituire
+            List<TipoDatoDto> dtoList = new ArrayList<>();
+            Integer numLastLevelOrg = elabTipiDato(nmUserid, AppNameEnum.SACER,
+                    OrganizEnum.AMBIENTE, nmAmbiente, OrganizEnum.ENTE, nmEnte,
+                    OrganizEnum.STRUTTURA, nmStrut, dtoList);
 
-	    log.atInfo().log("TipiDatoAbilitati - Recuperati {} tipi dato per la struttura {}",
-		    numLastLevelOrg, struttura);
-	    // Ritorna la response
-	    return new TipiDatoResponse(struttura, null, dtoList, numLastLevelOrg, uri);
+            log.atInfo().log("TipiDatoAbilitati - Recuperati {} tipi dato per la struttura {}",
+                    numLastLevelOrg, struttura);
+            // Ritorna la response
+            return new TipiDatoResponse(struttura, null, dtoList, numLastLevelOrg, uri);
 
-	} catch (Exception e) {
-	    throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
-		    .cause(e)
-		    .message("Errore estrazione lista tipi dato per nmUserid {0} e struttura {1}",
-			    nmUserid, struttura)
-		    .build();
-	}
+        } catch (Exception e) {
+            throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
+                    .cause(e)
+                    .message("Errore estrazione lista tipi dato per nmUserid {0} e struttura {1}",
+                            nmUserid, struttura)
+                    .build();
+        }
     }
 
     @Override
     @Transactional(value = TxType.REQUIRED, rollbackOn = {
-	    AppGenericRuntimeException.class })
+            AppGenericRuntimeException.class })
     public TipiDatoResponse listTipiDatoByVers(String nmUserid, String nmAmbiente, String nmVers,
-	    String uri) {
-	String versatore = nmAmbiente + " / " + nmVers;
-	try {
-	    // Inizializzo le informazioni da restituire
-	    List<TipoDatoDto> dtoList = new ArrayList<>();
-	    Integer numLastLevelOrg = elabTipiDato(nmUserid, AppNameEnum.SACER_PREINGEST, null,
-		    null, OrganizEnum.AMBIENTE, nmAmbiente, OrganizEnum.VERSATORE, nmVers, dtoList);
+            String uri) {
+        String versatore = nmAmbiente + " / " + nmVers;
+        try {
+            // Inizializzo le informazioni da restituire
+            List<TipoDatoDto> dtoList = new ArrayList<>();
+            Integer numLastLevelOrg = elabTipiDato(nmUserid, AppNameEnum.SACER_PREINGEST, null,
+                    null, OrganizEnum.AMBIENTE, nmAmbiente, OrganizEnum.VERSATORE, nmVers, dtoList);
 
-	    log.atInfo().log("TipiDatoAbilitati - Recuperati {} tipi dato per il versatore {}",
-		    numLastLevelOrg, versatore);
-	    // Ritorna la response
-	    return new TipiDatoResponse(null, versatore, dtoList, numLastLevelOrg, uri);
+            log.atInfo().log("TipiDatoAbilitati - Recuperati {} tipi dato per il versatore {}",
+                    numLastLevelOrg, versatore);
+            // Ritorna la response
+            return new TipiDatoResponse(null, versatore, dtoList, numLastLevelOrg, uri);
 
-	} catch (Exception e) {
-	    throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
-		    .cause(e)
-		    .message("Errore estrazione lista tipi dato per nmUserid {0} e versatore {1}",
-			    nmUserid, versatore)
-		    .build();
-	}
+        } catch (Exception e) {
+            throw AppGenericRuntimeException.builder().category(ErrorCategory.INTERNAL_ERROR)
+                    .cause(e)
+                    .message("Errore estrazione lista tipi dato per nmUserid {0} e versatore {1}",
+                            nmUserid, versatore)
+                    .build();
+        }
     }
 
     /**
@@ -124,21 +124,21 @@ public class TipiDatoService implements ITipiDatoService {
      * @return numLastLevelOrg totale risultati
      */
     private Integer elabTipiDato(String nmUserid, AppNameEnum applic,
-	    OrganizEnum nmTipoOrganizNonno, String nmOrganizNonno, OrganizEnum nmTipoOrganizPadre,
-	    String nmOrganizPadre, OrganizEnum nmTipoOrganiz, String nmOrganiz,
-	    List<TipoDatoDto> dtoList) {
-	log.atInfo().log("TipiDatoAbilitati - Recupero i tipi dato abilitati all'organizzazione {}",
-		nmOrganizNonno + " / " + nmOrganizPadre + " / " + nmOrganiz);
-	// Utilizzo una treemap per sfruttare l'ordinamento naturale
-	Map<String, List<String>> mappaTipiDato = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-	// Recupero i tipi dato dell'organizzazione
-	Stream<Object[]> result = orgDao.findTipiDato(applic, nmUserid, nmTipoOrganizNonno,
-		nmOrganizNonno, nmTipoOrganizPadre, nmOrganizPadre, nmTipoOrganiz, nmOrganiz);
-	// Li "organizzo" in oggetti Map e ricavo il numero di tipi dato
-	int totale = getTipiDatoMap(result, mappaTipiDato);
-	// Passaggio jpa -> dto
-	dtoList.addAll(populateTipoDato(mappaTipiDato));
-	return totale;
+            OrganizEnum nmTipoOrganizNonno, String nmOrganizNonno, OrganizEnum nmTipoOrganizPadre,
+            String nmOrganizPadre, OrganizEnum nmTipoOrganiz, String nmOrganiz,
+            List<TipoDatoDto> dtoList) {
+        log.atInfo().log("TipiDatoAbilitati - Recupero i tipi dato abilitati all'organizzazione {}",
+                nmOrganizNonno + " / " + nmOrganizPadre + " / " + nmOrganiz);
+        // Utilizzo una treemap per sfruttare l'ordinamento naturale
+        Map<String, List<String>> mappaTipiDato = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        // Recupero i tipi dato dell'organizzazione
+        Stream<Object[]> result = orgDao.findTipiDato(applic, nmUserid, nmTipoOrganizNonno,
+                nmOrganizNonno, nmTipoOrganizPadre, nmOrganizPadre, nmTipoOrganiz, nmOrganiz);
+        // Li "organizzo" in oggetti Map e ricavo il numero di tipi dato
+        int totale = getTipiDatoMap(result, mappaTipiDato);
+        // Passaggio jpa -> dto
+        dtoList.addAll(populateTipoDato(mappaTipiDato));
+        return totale;
     }
 
     /**
@@ -150,26 +150,26 @@ public class TipiDatoService implements ITipiDatoService {
      * @return totale
      */
     private int getTipiDatoMap(Stream<Object[]> tipiDatoAsStream,
-	    Map<String, List<String>> mappaTipiDato) {
-	AtomicInteger numTipiDatoStruttura = new AtomicInteger();
-	// forEach
-	tipiDatoAsStream.forEach(tipoDato -> {
-	    // Codice tipo dato: REGISTRO, TIPO_UD, TIPO_DOC...
-	    String cdTipoDato = (String) tipoDato[0];
-	    // Nome del tipo dato
-	    String nmTipoDato = (String) tipoDato[1];
-	    List<String> listaNomiTipiDato = new ArrayList<>();
+            Map<String, List<String>> mappaTipiDato) {
+        AtomicInteger numTipiDatoStruttura = new AtomicInteger();
+        // forEach
+        tipiDatoAsStream.forEach(tipoDato -> {
+            // Codice tipo dato: REGISTRO, TIPO_UD, TIPO_DOC...
+            String cdTipoDato = (String) tipoDato[0];
+            // Nome del tipo dato
+            String nmTipoDato = (String) tipoDato[1];
+            List<String> listaNomiTipiDato = new ArrayList<>();
 
-	    if (mappaTipiDato.containsKey(cdTipoDato)) {
-		listaNomiTipiDato = mappaTipiDato.get(cdTipoDato);
-	    }
+            if (mappaTipiDato.containsKey(cdTipoDato)) {
+                listaNomiTipiDato = mappaTipiDato.get(cdTipoDato);
+            }
 
-	    listaNomiTipiDato.add(nmTipoDato);
-	    numTipiDatoStruttura.incrementAndGet();
-	    Collections.sort(listaNomiTipiDato);
-	    mappaTipiDato.put(cdTipoDato, listaNomiTipiDato);
-	});
-	return numTipiDatoStruttura.get();
+            listaNomiTipiDato.add(nmTipoDato);
+            numTipiDatoStruttura.incrementAndGet();
+            Collections.sort(listaNomiTipiDato);
+            mappaTipiDato.put(cdTipoDato, listaNomiTipiDato);
+        });
+        return numTipiDatoStruttura.get();
     }
 
     /**
@@ -180,18 +180,18 @@ public class TipiDatoService implements ITipiDatoService {
      * @return Lista di {@link TipoDatoDto} contenente i tipi dato abilitati
      */
     private List<TipoDatoDto> populateTipoDato(Map<String, List<String>> mappaTipiDato) {
-	List<TipoDatoDto> listaTipiDatoDto = new ArrayList<>();
-	for (Map.Entry<String, List<String>> tipiDatoStrutturaEntry : mappaTipiDato.entrySet()) {
-	    // Codice tipo dato: REGISTRO, TIPO_UD, TIPO_DOC, TIPO_OBJECT...
-	    String cdTipoDato = tipiDatoStrutturaEntry.getKey();
-	    // Lista dei valori
-	    List<String> listaNomiTipiDato = tipiDatoStrutturaEntry.getValue();
-	    // Creo il dto
-	    TipoDatoDto tipoDatoDto = new TipoDatoDto(cdTipoDato, listaNomiTipiDato);
-	    // Lo aggiungo alla lista dei dto
-	    listaTipiDatoDto.add(tipoDatoDto);
-	}
-	return listaTipiDatoDto;
+        List<TipoDatoDto> listaTipiDatoDto = new ArrayList<>();
+        for (Map.Entry<String, List<String>> tipiDatoStrutturaEntry : mappaTipiDato.entrySet()) {
+            // Codice tipo dato: REGISTRO, TIPO_UD, TIPO_DOC, TIPO_OBJECT...
+            String cdTipoDato = tipiDatoStrutturaEntry.getKey();
+            // Lista dei valori
+            List<String> listaNomiTipiDato = tipiDatoStrutturaEntry.getValue();
+            // Creo il dto
+            TipoDatoDto tipoDatoDto = new TipoDatoDto(cdTipoDato, listaNomiTipiDato);
+            // Lo aggiungo alla lista dei dto
+            listaTipiDatoDto.add(tipoDatoDto);
+        }
+        return listaTipiDatoDto;
     }
 
 }

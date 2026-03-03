@@ -34,7 +34,7 @@ public class NotFoundExeptionMapperProvider implements ExceptionMapper<NotFoundE
 
     @Override
     public Response toResponse(NotFoundException exception) {
-	return Response.status(404).build();
+        return Response.status(404).build();
     }
 
 }

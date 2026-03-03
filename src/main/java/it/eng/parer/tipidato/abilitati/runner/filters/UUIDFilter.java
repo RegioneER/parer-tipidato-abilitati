@@ -37,10 +37,10 @@ public class UUIDFilter {
     @ServerRequestFilter(priority = 1000)
     public Optional<RestResponse<Void>> getFilter(ContainerRequestContext ctx) {
 
-	if (ctx.getMethod().equals(HttpMethod.GET)) {
-	    UUIDMdcLogUtil.genUuid();
-	}
+        if (ctx.getMethod().equals(HttpMethod.GET)) {
+            UUIDMdcLogUtil.genUuid();
+        }
 
-	return Optional.empty();
+        return Optional.empty();
     }
 }

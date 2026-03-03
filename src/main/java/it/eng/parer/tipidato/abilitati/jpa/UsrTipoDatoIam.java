@@ -51,32 +51,32 @@ public class UsrTipoDatoIam implements Serializable {
     @Id
     @Column(name = "ID_TIPO_DATO_IAM")
     public Long getIdTipoDatoIam() {
-	return this.idTipoDatoIam;
+        return this.idTipoDatoIam;
     }
 
     @Column(name = "NM_TIPO_DATO")
     public String getNmTipoDato() {
-	return this.nmTipoDato;
+        return this.nmTipoDato;
     }
 
     // bi-directional many-to-one association to AplClasseTipoDato
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_CLASSE_TIPO_DATO")
     public AplClasseTipoDato getAplClasseTipoDato() {
-	return this.aplClasseTipoDato;
+        return this.aplClasseTipoDato;
     }
 
     // bi-directional many-to-one association to UsrAbilDati
     @OneToMany(mappedBy = "usrTipoDatoIam")
     public List<UsrAbilDati> getUsrAbilDatis() {
-	return this.usrAbilDatis;
+        return this.usrAbilDatis;
     }
 
     // bi-directional many-to-one association to UsrOrganizIam
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ORGANIZ_IAM")
     public UsrOrganizIam getUsrOrganizIam() {
-	return this.usrOrganizIam;
+        return this.usrOrganizIam;
     }
 
 }

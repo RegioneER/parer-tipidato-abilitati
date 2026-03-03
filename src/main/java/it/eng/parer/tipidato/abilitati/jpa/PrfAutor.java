@@ -44,20 +44,20 @@ public class PrfAutor implements Serializable {
     @Id
     @Column(name = "ID_AUTOR")
     public Long getIdAutor() {
-	return this.idAutor;
+        return this.idAutor;
     }
 
     // bi-directional many-to-one association to AplServizioWeb
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_SERVIZIO_WEB")
     public AplServizioWeb getAplServizioWeb() {
-	return this.aplServizioWeb;
+        return this.aplServizioWeb;
     }
 
     // bi-directional many-to-one association to PrfUsoRuoloApplic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USO_RUOLO_APPLIC")
     public PrfUsoRuoloApplic getPrfUsoRuoloApplic() {
-	return this.prfUsoRuoloApplic;
+        return this.prfUsoRuoloApplic;
     }
 }

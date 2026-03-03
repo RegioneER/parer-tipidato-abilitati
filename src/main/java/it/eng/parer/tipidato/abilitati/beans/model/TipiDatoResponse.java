@@ -35,37 +35,37 @@ public class TipiDatoResponse {
     private List<TipoDatoDto> tipiDato;
 
     public TipiDatoResponse() {
-	super();
+        super();
     }
 
     public TipiDatoResponse(String struttura, String versatore, List<TipoDatoDto> tipiDato,
-	    Integer totaleTipiDato, String uri) {
-	super();
-	this.struttura = struttura;
-	this.versatore = versatore;
-	this.tipiDato = tipiDato;
-	this.totale = totaleTipiDato;
-	this.path = uri;
+            Integer totaleTipiDato, String uri) {
+        super();
+        this.struttura = struttura;
+        this.versatore = versatore;
+        this.tipiDato = tipiDato;
+        this.totale = totaleTipiDato;
+        this.path = uri;
     }
 
     public String getPath() {
-	return path;
+        return path;
     }
 
     public Integer getTotale() {
-	return totale;
+        return totale;
     }
 
     public List<TipoDatoDto> getTipiDato() {
-	return tipiDato;
+        return tipiDato;
     }
 
     public String getStruttura() {
-	return struttura;
+        return struttura;
     }
 
     public String getVersatore() {
-	return versatore;
+        return versatore;
     }
 
 }

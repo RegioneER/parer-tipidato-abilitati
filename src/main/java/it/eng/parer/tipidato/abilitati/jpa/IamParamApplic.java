@@ -48,28 +48,28 @@ public class IamParamApplic implements Serializable {
     @Id
     @Column(name = "ID_PARAM_APPLIC")
     public Long getIdParamApplic() {
-	return this.idParamApplic;
+        return this.idParamApplic;
     }
 
     @Column(name = "FL_APPART_APPLIC", columnDefinition = "char(1)")
     public String getFlAppartApplic() {
-	return this.flAppartApplic;
+        return this.flAppartApplic;
     }
 
     @Column(name = "NM_PARAM_APPLIC")
     public String getNmParamApplic() {
-	return this.nmParamApplic;
+        return this.nmParamApplic;
     }
 
     @Column(name = "TI_PARAM_APPLIC")
     public String getTiParamApplic() {
-	return this.tiParamApplic;
+        return this.tiParamApplic;
     }
 
     // bi-directional many-to-one association to IamValoreParamApplic
     @OneToMany(mappedBy = "iamParamApplic")
     public List<IamValoreParamApplic> getIamValoreParamApplics() {
-	return this.iamValoreParamApplics;
+        return this.iamValoreParamApplics;
     }
 
 }

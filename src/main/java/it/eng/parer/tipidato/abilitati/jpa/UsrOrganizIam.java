@@ -55,45 +55,45 @@ public class UsrOrganizIam implements Serializable {
     @Id
     @Column(name = "ID_ORGANIZ_IAM")
     public Long getIdOrganizIam() {
-	return this.idOrganizIam;
+        return this.idOrganizIam;
     }
 
     @Column(name = "NM_ORGANIZ")
     public String getNmOrganiz() {
-	return this.nmOrganiz;
+        return this.nmOrganiz;
     }
 
     // bi-directional many-to-one association to UsrOrganizIam
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ORGANIZ_IAM_PADRE")
     public UsrOrganizIam getUsrOrganizIamPadre() {
-	return this.usrOrganizIamPadre;
+        return this.usrOrganizIamPadre;
     }
 
     // bi-directional many-to-one association to AplApplic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_APPLIC")
     public AplApplic getAplApplic() {
-	return this.aplApplic;
+        return this.aplApplic;
     }
 
     // bi-directional many-to-one association to UsrOrganizIam
     @OneToMany(mappedBy = "usrOrganizIamPadre")
     public List<UsrOrganizIam> getUsrOrganizIams() {
-	return this.usrOrganizIams;
+        return this.usrOrganizIams;
     }
 
     // bi-directional many-to-one association to AplTipoOrganiz
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_TIPO_ORGANIZ")
     public AplTipoOrganiz getAplTipoOrganiz() {
-	return this.aplTipoOrganiz;
+        return this.aplTipoOrganiz;
     }
 
     // bi-directional many-to-one association to UsrAbilOrganiz
     @OneToMany(mappedBy = "usrOrganizIam")
     public List<UsrAbilOrganiz> getUsrAbilOrganizs() {
-	return this.usrAbilOrganizs;
+        return this.usrAbilOrganizs;
     }
 
 }

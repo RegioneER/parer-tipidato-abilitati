@@ -20,7 +20,7 @@ package it.eng.parer.tipidato.abilitati.beans.utils;
 public class Costants {
 
     private Costants() {
-	throw new IllegalStateException("Utility class");
+        throw new IllegalStateException("Utility class");
     }
 
     // nome servizio
@@ -58,11 +58,11 @@ public class Costants {
     public static final String COD_PERM_INTERNAL = "PERMISSION-ERROR";
 
     public enum AppNameEnum {
-	ANY, SACER, SACER_PREINGEST
+        ANY, SACER, SACER_PREINGEST
     }
 
     public enum OrganizEnum {
-	AMBIENTE, ENTE, STRUTTURA, VERSATORE
+        AMBIENTE, ENTE, STRUTTURA, VERSATORE
     }
 
 }

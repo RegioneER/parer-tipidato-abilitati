@@ -49,25 +49,25 @@ public class AplServizioWeb implements Serializable {
     @Id
     @Column(name = "ID_SERVIZIO_WEB")
     public Long getIdServizioWeb() {
-	return this.idServizioWeb;
+        return this.idServizioWeb;
     }
 
     @Column(name = "NM_SERVIZIO_WEB")
     public String getNmServizioWeb() {
-	return this.nmServizioWeb;
+        return this.nmServizioWeb;
     }
 
     // bi-directional many-to-one association to AplApplic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_APPLIC")
     public AplApplic getAplApplic() {
-	return this.aplApplic;
+        return this.aplApplic;
     }
 
     // bi-directional many-to-one association to PrfAutor
     @OneToMany(mappedBy = "aplServizioWeb")
     public List<PrfAutor> getPrfAutors() {
-	return this.prfAutors;
+        return this.prfAutors;
     }
 
 }

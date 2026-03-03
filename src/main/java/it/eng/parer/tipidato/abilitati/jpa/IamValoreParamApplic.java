@@ -46,23 +46,23 @@ public class IamValoreParamApplic implements Serializable {
     @Id
     @Column(name = "ID_VALORE_PARAM_APPLIC")
     public Long getIdValoreParamApplic() {
-	return this.idValoreParamApplic;
+        return this.idValoreParamApplic;
     }
 
     @Column(name = "DS_VALORE_PARAM_APPLIC")
     public String getDsValoreParamApplic() {
-	return this.dsValoreParamApplic;
+        return this.dsValoreParamApplic;
     }
 
     @Column(name = "TI_APPART")
     public String getTiAppart() {
-	return this.tiAppart;
+        return this.tiAppart;
     }
 
     // bi-directional many-to-one association to IamParamApplic
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_PARAM_APPLIC")
     public IamParamApplic getIamParamApplic() {
-	return this.iamParamApplic;
+        return this.iamParamApplic;
     }
 }

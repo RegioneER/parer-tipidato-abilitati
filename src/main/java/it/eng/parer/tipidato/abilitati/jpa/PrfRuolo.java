@@ -44,18 +44,18 @@ public class PrfRuolo implements Serializable {
     @Id
     @Column(name = "ID_RUOLO")
     public Long getIdRuolo() {
-	return this.idRuolo;
+        return this.idRuolo;
     }
 
     // bi-directional many-to-one association to PrfUsoRuoloApplic
     @OneToMany(mappedBy = "prfRuolo")
     public List<PrfUsoRuoloApplic> getPrfUsoRuoloApplics() {
-	return this.prfUsoRuoloApplics;
+        return this.prfUsoRuoloApplics;
     }
 
     // bi-directional many-to-one association to UsrUsoRuoloUserDefault
     @OneToMany(mappedBy = "prfRuolo")
     public List<UsrUsoRuoloUserDefault> getUsrUsoRuoloUserDefaults() {
-	return this.usrUsoRuoloUserDefaults;
+        return this.usrUsoRuoloUserDefaults;
     }
 }

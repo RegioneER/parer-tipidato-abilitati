@@ -37,36 +37,36 @@ import jakarta.persistence.TypedQuery;
 public class PermissionAndAccessLogDao implements IPermissionAndAccessLogDao {
 
     private static final String IAM_AUTH_QUERY = " SELECT 1 FROM UsrUser iu JOIN iu.usrUsoUserApplics uuua "
-	    + " JOIN uuua.usrUsoRuoloUserDefaults uurud "
-	    + " JOIN uurud.prfRuolo pr JOIN pr.prfUsoRuoloApplics pura "
-	    + " JOIN pura.prfAutors autors JOIN autors.aplServizioWeb asw "
-	    + " WHERE uuua.aplApplic.nmApplic = 'SACER_IAM' "
-	    + " AND iu.nmUserid = :username AND asw.nmServizioWeb = :servizioWeb "
-	    + " AND iu.tipoUser = 'AUTOMA' ";
+            + " JOIN uuua.usrUsoRuoloUserDefaults uurud "
+            + " JOIN uurud.prfRuolo pr JOIN pr.prfUsoRuoloApplics pura "
+            + " JOIN pura.prfAutors autors JOIN autors.aplServizioWeb asw "
+            + " WHERE uuua.aplApplic.nmApplic = 'SACER_IAM' "
+            + " AND iu.nmUserid = :username AND asw.nmServizioWeb = :servizioWeb "
+            + " AND iu.tipoUser = 'AUTOMA' ";
 
     private static final String LOG_ACCESSI_PARAM_QUERY = " SELECT paramApplic.nmParamApplic, valoreParamApplic.dsValoreParamApplic "
-	    + " FROM IamValoreParamApplic valoreParamApplic JOIN valoreParamApplic.iamParamApplic paramApplic "
-	    + " WHERE paramApplic.flAppartApplic = '1' AND valoreParamApplic.tiAppart = 'APPLIC' "
-	    + " AND paramApplic.tiParamApplic = :nmFunction ";
+            + " FROM IamValoreParamApplic valoreParamApplic JOIN valoreParamApplic.iamParamApplic paramApplic "
+            + " WHERE paramApplic.flAppartApplic = '1' AND valoreParamApplic.tiAppart = 'APPLIC' "
+            + " AND paramApplic.tiParamApplic = :nmFunction ";
 
     @Inject
     EntityManager entityManager;
 
     @Override
     public boolean checkUserEnabledOnService(String nmUserid) {
-	Query q = entityManager.createQuery(IAM_AUTH_QUERY);
-	q.setParameter("username", nmUserid);
-	q.setParameter("servizioWeb", SERVICE_NAME);
-	return !q.getResultList().isEmpty();
+        Query q = entityManager.createQuery(IAM_AUTH_QUERY);
+        q.setParameter("username", nmUserid);
+        q.setParameter("servizioWeb", SERVICE_NAME);
+        return !q.getResultList().isEmpty();
     }
 
     @Override
     public HashMap<String, String> loadIdpLoggerParams(String nmFunction) {
-	TypedQuery<Object[]> q = entityManager.createQuery(LOG_ACCESSI_PARAM_QUERY, Object[].class);
-	q.setParameter("nmFunction", nmFunction);
-	List<Object[]> list = q.getResultList();
-	return (HashMap<String, String>) list.stream()
-		.collect(Collectors.toMap(a -> (String) a[0], a -> (String) a[1]));
+        TypedQuery<Object[]> q = entityManager.createQuery(LOG_ACCESSI_PARAM_QUERY, Object[].class);
+        q.setParameter("nmFunction", nmFunction);
+        List<Object[]> list = q.getResultList();
+        return (HashMap<String, String>) list.stream()
+                .collect(Collectors.toMap(a -> (String) a[0], a -> (String) a[1]));
     }
 
 }

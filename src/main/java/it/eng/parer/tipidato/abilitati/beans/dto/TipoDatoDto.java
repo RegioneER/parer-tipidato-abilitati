@@ -32,21 +32,21 @@ public class TipoDatoDto implements Serializable {
     private List<String> valori;
 
     public TipoDatoDto() {
-	super();
+        super();
     }
 
     public TipoDatoDto(String tipoDato, List<String> valori) {
-	super();
-	this.tipoDato = tipoDato;
-	this.valori = valori;
+        super();
+        this.tipoDato = tipoDato;
+        this.valori = valori;
     }
 
     public String getTipoDato() {
-	return tipoDato;
+        return tipoDato;
     }
 
     public List<String> getValori() {
-	return valori;
+        return valori;
     }
 
 }

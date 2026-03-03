@@ -35,117 +35,117 @@ class StrutTipiDatoEndpointTest {
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void successNoResult() {
-	given().when().queryParam("amb", "NO-amb").queryParam("ente", "NO-ente")
-		.queryParam("strut", "NO-strut").get(URL_GET_STRUT_TIPIDATO).then().statusCode(200)
-		.body("$", hasKey("totale")).body("totale", is(0));
+        given().when().queryParam("amb", "NO-amb").queryParam("ente", "NO-ente")
+                .queryParam("strut", "NO-strut").get(URL_GET_STRUT_TIPIDATO).then().statusCode(200)
+                .body("$", hasKey("totale")).body("totale", is(0));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void successStrut() {
-	given().when().queryParam("amb", "PARER_PROVA").queryParam("ente", "ente_test")
-		.queryParam("strut", "PARER_TEST").get(URL_GET_STRUT_TIPIDATO).then()
-		.statusCode(200).body("$", hasKey("totale")).body("$", hasKey("tipiDato"));
+        given().when().queryParam("amb", "PARER_PROVA").queryParam("ente", "ente_test")
+                .queryParam("strut", "PARER_TEST").get(URL_GET_STRUT_TIPIDATO).then()
+                .statusCode(200).body("$", hasKey("totale")).body("$", hasKey("tipiDato"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badAmbEnteNoStrut() {
-	given().when().queryParam("amb", "PARER_PROVA").queryParam("ente", "ente_test")
-		.get(URL_GET_STRUT_TIPIDATO).then().statusCode(400)
-		.body("$", hasKey("BAD-REQUEST-ERROR-1"));
+        given().when().queryParam("amb", "PARER_PROVA").queryParam("ente", "ente_test")
+                .get(URL_GET_STRUT_TIPIDATO).then().statusCode(400)
+                .body("$", hasKey("BAD-REQUEST-ERROR-1"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badAmbNoEnteStrut() {
-	given().when().queryParam("amb", "PARER_PROVA").queryParam("strut", "PARER_TEST")
-		.get(URL_GET_STRUT_TIPIDATO).then().statusCode(400)
-		.body("$", hasKey("BAD-REQUEST-ERROR-1"));
+        given().when().queryParam("amb", "PARER_PROVA").queryParam("strut", "PARER_TEST")
+                .get(URL_GET_STRUT_TIPIDATO).then().statusCode(400)
+                .body("$", hasKey("BAD-REQUEST-ERROR-1"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badAmbNoEnteNoStrut() {
-	given().when().queryParam("amb", "PARER_PROVA").get(URL_GET_STRUT_TIPIDATO).then()
-		.statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"))
-		.body("$", hasKey("BAD-REQUEST-ERROR-2"));
+        given().when().queryParam("amb", "PARER_PROVA").get(URL_GET_STRUT_TIPIDATO).then()
+                .statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"))
+                .body("$", hasKey("BAD-REQUEST-ERROR-2"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badNoAmbEnteNoStrut() {
-	given().when().queryParam("ente", "ente_test").get(URL_GET_STRUT_TIPIDATO).then()
-		.statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"))
-		.body("$", hasKey("BAD-REQUEST-ERROR-2"));
+        given().when().queryParam("ente", "ente_test").get(URL_GET_STRUT_TIPIDATO).then()
+                .statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"))
+                .body("$", hasKey("BAD-REQUEST-ERROR-2"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badNoAmbEnteStrut() {
-	given().when().queryParam("ente", "ente_test").queryParam("strut", "PARER_TEST")
-		.get(URL_GET_STRUT_TIPIDATO).then().statusCode(400)
-		.body("$", hasKey("BAD-REQUEST-ERROR-1"));
+        given().when().queryParam("ente", "ente_test").queryParam("strut", "PARER_TEST")
+                .get(URL_GET_STRUT_TIPIDATO).then().statusCode(400)
+                .body("$", hasKey("BAD-REQUEST-ERROR-1"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badNoAmbNoEnteStrut() {
-	given().when().queryParam("strut", "PARER_TEST").get(URL_GET_STRUT_TIPIDATO).then()
-		.statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"))
-		.body("$", hasKey("BAD-REQUEST-ERROR-2"));
+        given().when().queryParam("strut", "PARER_TEST").get(URL_GET_STRUT_TIPIDATO).then()
+                .statusCode(400).body("$", hasKey("BAD-REQUEST-ERROR-1"))
+                .body("$", hasKey("BAD-REQUEST-ERROR-2"));
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void badNoAmbNoEnteNoStrut() {
-	given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(400)
-		.body("$", hasKey("BAD-REQUEST-ERROR-1")).body("$", hasKey("BAD-REQUEST-ERROR-2"))
-		.body("$", hasKey("BAD-REQUEST-ERROR-3"));
+        given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(400)
+                .body("$", hasKey("BAD-REQUEST-ERROR-1")).body("$", hasKey("BAD-REQUEST-ERROR-2"))
+                .body("$", hasKey("BAD-REQUEST-ERROR-3"));
     }
 
     @Test
     @TestSecurity(user = " ", roles = {
-	    "versatore" })
+            "versatore" })
     void badUserEmptyRequest() {
-	given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(400);
+        given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(400);
     }
 
     @Test
     @TestSecurity(authorizationEnabled = true)
     void authNoTokenRequest() {
-	given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(401);
+        given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(401);
     }
 
     @Test
     @TestSecurity(user = "fakeuser", roles = {
-	    "fakerole" })
+            "fakerole" })
     void noAuthRequest() {
-	given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(403);
+        given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(403);
     }
 
     @Test
     @TestSecurity(user = "test_microservizi", roles = {
-	    "versatore" })
+            "versatore" })
     void methodNotAllowed() {
-	given().when().post(URL_GET_STRUT_TIPIDATO).then().statusCode(405);
+        given().when().post(URL_GET_STRUT_TIPIDATO).then().statusCode(405);
     }
 
     @Test
     @TestSecurity(user = "test_microservizi_no_abil", roles = {
-	    "versatore" })
+            "versatore" })
     void noAuthRequestBySIAM() {
-	given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(401).body("$",
-		hasKey(COD_PERM_INTERNAL));
+        given().when().get(URL_GET_STRUT_TIPIDATO).then().statusCode(401).body("$",
+                hasKey(COD_PERM_INTERNAL));
     }
 }
